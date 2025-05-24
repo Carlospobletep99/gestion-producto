@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.inventario.inventario.model.Producto;
+import com.inventario.inventario.model.Proveedor;
 import com.inventario.inventario.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
 
@@ -34,5 +35,10 @@ public class ProductoService {
     public List<Producto> guardarProductos(List<Producto> productos){
         return productoRepository.saveAll(productos);
 
+    }
+
+    //PRODUCTOS DE UN PROVEEDOR EN ESPECIFICO:
+    public List<Producto> findByProveedor(Proveedor proveedorBuscar) {
+        return this.productoRepository.findByProveedor(proveedorBuscar);
     }
 }

@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.inventario.inventario.model.Producto;
+import com.inventario.inventario.model.Proveedor;
 import com.inventario.inventario.service.ProductoService;
 
 @RestController
-@RequestMapping("/api/v1/productos")
+// http://localhost:8080
+@RequestMapping("/api/v1/productos")// PARA AGREGAR MAS DE UN PRODUCTO: /bulk
 public class ProductoController {
 
     @Autowired
@@ -78,6 +80,18 @@ public class ProductoController {
     public ResponseEntity<List<Producto>> guardarProductos(@RequestBody List<Producto> productos){
         List<Producto> guardados = productoService.guardarProductos(productos);
         return ResponseEntity.ok(guardados);
+    }
+
+    //METODO PARA RETORNAR PRODUCTOS PERTENECIENTES A UN PROVEEDOR ESPECIFICO:
+    @GetMapping("/proveedor/{codigoProveedor}")
+    public ResponseEntity<List<Producto>> getStoresByProveedor(@PathVariable Integer codigoProveedor) {
+        Proveedor proveedor = new Proveedor();
+        proveedor.setCodigoProveedor(codigoProveedor);
+        List<Producto> listaProductospv = this.productoService.findByProveedor(proveedor);
+        if (listaProductospv.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(listaProductospv);
     }
 }
 
