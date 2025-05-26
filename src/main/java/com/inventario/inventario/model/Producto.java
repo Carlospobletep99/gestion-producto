@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity//Marca esta clase como una entidad JPA
 @Table(name = "PRODUCTO")//Especifica el nombre de la tabla en la base de datos
@@ -24,7 +24,7 @@ public class Producto {
     private String descripcion;//DESCRIPCION DEL PRODUCTO
 
     @Column(nullable=true)//NO TODOS LOS PRODUCTOS VENCEN  
-    private Date fechaVencimiento;//FECHA DE VENCIMIENTO DEL PRODUCTO
+    private LocalDate fechaVencimiento;//FECHA DE VENCIMIENTO DEL PRODUCTO
 
     @Column(nullable=false)
     private String categoria;//CATEGORIA DEL PRODUCTO
