@@ -19,6 +19,6 @@ public class Proveedor {
     @Column(columnDefinition = "NUMBER(3)")
     private Integer codigoProveedor;           
 
-    @Column(length = 70, nullable = false)
+    @Column(nullable=false)
     private String nombreProveedor;
 }

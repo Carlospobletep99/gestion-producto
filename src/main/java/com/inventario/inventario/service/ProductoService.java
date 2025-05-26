@@ -27,14 +27,13 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public void delete(long id){
+    public void delete(Long id){
         productoRepository.deleteById(id);
     }
     
     //MAS DE UN PRODUCTO:
     public List<Producto> guardarProductos(List<Producto> productos){
         return productoRepository.saveAll(productos);
-
     }
 
     //PRODUCTOS DE UN PROVEEDOR EN ESPECIFICO:

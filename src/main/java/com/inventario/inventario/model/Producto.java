@@ -29,8 +29,12 @@ public class Producto {
     @Column(nullable=false)
     private String categoria;//CATEGORIA DEL PRODUCTO
 
-    @Column(nullable = false)
+    @Column(nullable=false)
     private int cantidad;//CANTIDAD DEL PRODUCTO
 
     //(nullable=false) -> LA COLUMNA NO PUEDE SER NULA
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_proveedor", referencedColumnName = "codigoProveedor", nullable = false)
+    private Proveedor proveedor;
 }   
