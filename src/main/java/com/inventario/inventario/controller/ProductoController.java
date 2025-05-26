@@ -93,6 +93,38 @@ public class ProductoController {
         }
         return ResponseEntity.ok(listaProductospv);
     }
+
+    //NUEVOS:
+
+    //METODO PARA BUSCAR PRODUCTOS POR NOMBRE:
+    @GetMapping("/buscar/{texto}")
+    public ResponseEntity<List<Producto>> buscarPorNombre(@PathVariable String texto) {
+        List<Producto> productos = productoService.findByNombreContaining(texto);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    //METODO PARA RETORNAR PRODUCTOS VENCIDOS:
+    @GetMapping("/vencidos")
+    public ResponseEntity<List<Producto>> productosVencidos() {
+        List<Producto> productos = productoService.findProductosVencidos();
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
+
+    //METODO PARA RETORNAR PRODUCTOS PROXIMOS A VENCER:
+    @GetMapping("/proximos-vencer/{dias}")
+    public ResponseEntity<List<Producto>> productosProximosVencer(@PathVariable int dias) {
+        List<Producto> productos = productoService.findProductosProximosVencer(dias);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(productos);
+    }
 }
 
 

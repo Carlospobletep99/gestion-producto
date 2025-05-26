@@ -1,5 +1,6 @@
 package com.inventario.inventario.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,25 @@ public class ProductoService {
     //PRODUCTOS DE UN PROVEEDOR EN ESPECIFICO:
     public List<Producto> findByProveedor(Proveedor proveedorBuscar) {
         return this.productoRepository.findByProveedor(proveedorBuscar);
+    }
+
+    //NUEVOS:
+
+    //BUSCAR PRODUCTO POR NOMBRE:
+    public List<Producto> findByNombreContaining(String texto) {
+        return this.productoRepository.findByNombreContainingIgnoreCase(texto);
+    }
+    
+    //PRODUCTOS VENCIDOS:
+    public List<Producto> findProductosVencidos() {
+        LocalDate hoy = LocalDate.now();
+        return this.productoRepository.findByFechaVencimientoLessThanEqual(hoy);
+    }
+    
+    //PRODUCTOS PROXIMOS A VENCER:
+    public List<Producto> findProductosProximosVencer(int dias) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaLimite = hoy.plusDays(dias);
+        return this.productoRepository.findByFechaVencimientoBetween(hoy, fechaLimite);
     }
 }
