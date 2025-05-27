@@ -8,7 +8,7 @@ import com.inventario.inventario.model.Producto;
 import com.inventario.inventario.model.Proveedor;
 
 @Repository
-public interface ProductoRepository extends JpaRepository<Producto, Long> {
+public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     public List<Producto> findByProveedor(Proveedor proveedor);
     
     //NUEVOS:

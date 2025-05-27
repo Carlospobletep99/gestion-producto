@@ -66,7 +66,7 @@ public class ProductoController {
 
     //METODO PARA BORRAR UN PRODUCTO:
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
+    public ResponseEntity<?> eliminar(@PathVariable Integer id){
         try{
             productoService.delete(id);
             return ResponseEntity.noContent().build();
