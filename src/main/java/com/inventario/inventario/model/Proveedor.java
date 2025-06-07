@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Proveedor {
 
     @Id
-    @Column(columnDefinition = "NUMBER(3)")
+    @Column(columnDefinition = "INT(3)")
     private Integer codigoProveedor;           
 
     @Column(nullable=false)
