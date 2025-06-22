@@ -1,17 +1,19 @@
 package com.inventario.inventario;
 
 import net.datafaker.Faker;
+
 import java.util.Random;
 import java.util.List;
+import java.util.Locale;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.inventario.inventario.model.Producto;
-import com.inventario.inventario.model.Proveedor;
-import com.inventario.inventario.repository.ProductoRepository;
-import com.inventario.inventario.repository.ProveedorRepository;
+import com.inventario.inventario.model.*;
+import com.inventario.inventario.repository.*;
 
 @Profile("dev")
 @Component
@@ -24,7 +26,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Faker faker = new Faker();
+        Faker faker = new Faker(Locale.forLanguageTag("es-ES"));
         Random random = new Random();
         
         //GENERAR PROVEEDORES
@@ -41,10 +43,9 @@ public class DataLoader implements CommandLineRunner {
             Producto producto = new Producto();
             producto.setNombre(faker.commerce().productName());
             producto.setDescripcion(faker.lorem().sentence());
-            producto.setFechaVencimiento(faker.date().future(365, java.util.concurrent.TimeUnit.DAYS)
-                .toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+            producto.setFechaVencimiento(new Date());
             producto.setCategoria(faker.commerce().department());
-            producto.setCantidad(faker.number().numberBetween(1, 100));
+            producto.setCantidad(faker.number().numberBetween(100, 200));
             producto.setProveedor(proveedores.get(random.nextInt(proveedores.size())));
             productoRepository.save(producto);
         }
