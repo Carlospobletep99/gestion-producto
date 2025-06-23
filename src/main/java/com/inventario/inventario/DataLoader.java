@@ -4,7 +4,6 @@ import net.datafaker.Faker;
 
 import java.util.Random;
 import java.util.List;
-import java.util.Locale;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +25,10 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Faker faker = new Faker(Locale.forLanguageTag("es-ES"));
+        Faker faker = new Faker();
         Random random = new Random();
         
-        //GENERAR PROVEEDORES
+        //GENERAR PROVEEDORES:
         for (int i = 0; i < 10; i++) {
             Proveedor proveedor = new Proveedor();
             proveedor.setCodigoProveedor(i + 1);
@@ -38,14 +37,14 @@ public class DataLoader implements CommandLineRunner {
         }
         List<Proveedor> proveedores = proveedorRepository.findAll();
         
-        //GENERAR PRODUCTOS
+        //GENERAR PRODUCTOS:
         for (int i = 0; i < 10; i++) {
             Producto producto = new Producto();
             producto.setNombre(faker.commerce().productName());
             producto.setDescripcion(faker.lorem().sentence());
             producto.setFechaVencimiento(LocalDate.now().plusDays(faker.number().numberBetween(1, 365)));
             producto.setCategoria(faker.commerce().department());
-            producto.setCantidad(faker.number().numberBetween(100, 200));
+            producto.setCantidad(faker.number().numberBetween(1, 100));
             producto.setProveedor(proveedores.get(random.nextInt(proveedores.size())));
             productoRepository.save(producto);
         }
