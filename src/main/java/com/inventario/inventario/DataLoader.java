@@ -5,7 +5,7 @@ import net.datafaker.Faker;
 import java.util.Random;
 import java.util.List;
 import java.util.Locale;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -43,7 +43,7 @@ public class DataLoader implements CommandLineRunner {
             Producto producto = new Producto();
             producto.setNombre(faker.commerce().productName());
             producto.setDescripcion(faker.lorem().sentence());
-            producto.setFechaVencimiento(new Date());
+            producto.setFechaVencimiento(LocalDate.now().plusDays(faker.number().numberBetween(1, 365)));
             producto.setCategoria(faker.commerce().department());
             producto.setCantidad(faker.number().numberBetween(100, 200));
             producto.setProveedor(proveedores.get(random.nextInt(proveedores.size())));
