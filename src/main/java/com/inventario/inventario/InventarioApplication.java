@@ -3,6 +3,7 @@ package com.inventario.inventario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//SWAGGER URL: http://localhost:8080/doc/swagger-ui/index.html
 @SpringBootApplication
 public class InventarioApplication {
 
@@ -10,4 +11,3 @@ public class InventarioApplication {
 		SpringApplication.run(InventarioApplication.class, args);
 	}
 }
-//TODO OK :)
