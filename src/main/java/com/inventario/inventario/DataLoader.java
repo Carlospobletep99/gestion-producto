@@ -29,7 +29,7 @@ public class DataLoader implements CommandLineRunner {
         Random random = new Random();
         
         //GENERAR PROVEEDORES:
-        for (int i = 0; i < 10; i++) {
+        for (int i = 100; i < 200; i++) {
             Proveedor proveedor = new Proveedor();
             proveedor.setCodigoProveedor(i + 1);
             proveedor.setNombreProveedor(faker.company().name());
